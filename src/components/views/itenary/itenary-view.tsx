@@ -8,9 +8,12 @@ import {
 } from "@/services/api/destinations";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function ItenaryPage() {
+  const router = useRouter();
+
   const [location] = useState(
     (typeof window !== undefined &&
       localStorage?.getItem("location") &&
@@ -64,8 +67,6 @@ export function ItenaryPage() {
       setSelectedDestination(responseData?.data);
     }
   }, [responseData]);
-
-  console.log({ isFetching });
 
   return (
     <section className="mx-auto max-w-[420px]">
@@ -170,12 +171,23 @@ export function ItenaryPage() {
           <Button
             disabled={isFetchingData}
             className="bg-green-500 text-white w-full py-2 rounded mb-2"
+            onClick={() => {
+              localStorage.setItem(
+                "destinationSelected",
+                JSON.stringify({
+                  ...selectedDestination,
+                  name: selectedDestination?.name || "Matched by AI",
+                })
+              );
+              router.push("/chat");
+            }}
           >
             Save the Itinerary
           </Button>
           <Button
             disabled={isFetching}
             className="bg-green-500 text-white w-full py-2 rounded"
+            onClick={() => setSelectedTab("ai")}
           >
             Regenerate Itinerary with AI
           </Button>
