@@ -39,13 +39,16 @@ export default function GrabMatchPageView() {
           Set your preference first
         </p>
         <Link href={ROUTE_PATHS.GRAB_MATCH.PREFERENCES}>
-          <div className="w-full bg-teal-900 p-[8px] rounded-[10px]">
+          <div className="w-full flex flex-row items-center  bg-teal-900 p-[8px] rounded-[10px]">
             <Image
               alt="illustration-2"
               src="/images/illustration-secondary.svg"
               width={100}
               height={80}
             />
+            <p className="ml-[16px] text-[14px] text-white font-semibold">
+              Let people know what it's like to date you first
+            </p>
           </div>
         </Link>
       </div>
@@ -54,10 +57,14 @@ export default function GrabMatchPageView() {
         <p className="text-[18px] text-right text-teal-600 font-bold">
           Find the best match
         </p>
-        <div className="w-full bg-emerald-400 p-[8px] rounded-[10px] flex justify-end">
+
+        <div className="w-full flex flex-row items-center bg-emerald-400 p-[8px] rounded-[10px] flex justify-end">
+          <p className="mr-[16px] text-[14px] text-white text-right font-semibold">
+            Let people know what it's like to date you first
+          </p>
           <Image
-            alt="illustration-2"
-            src="/images/illustration-secondary.svg"
+            alt="illustration-3"
+            src="/images/illustration-tertiary.svg"
             width={100}
             height={80}
           />
