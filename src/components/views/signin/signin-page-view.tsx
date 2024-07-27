@@ -1,4 +1,3 @@
-import { signIn } from "@/auth";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
@@ -7,9 +6,6 @@ export function SignInPageView() {
     <form
       action={async () => {
         "use server";
-        await signIn("google", {
-          redirectTo: "/",
-        });
       }}
     >
       <Image
