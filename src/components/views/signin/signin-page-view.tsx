@@ -7,11 +7,10 @@ import { Input } from "@/components/ui/input";
 export function SignInPageView() {
   return (
     <form
-      action={async () => {
+      action={async (data) => {
         "use server";
-        await signIn("google", {
-          redirectTo: "/",
-        });
+        const email = data.get("email");
+        const password = data.get("password");
       }}
     >
       <Image
@@ -28,8 +27,18 @@ export function SignInPageView() {
         </p>
 
         <div className="flex flex-col gap-[30px]">
-          <Input type="email" placeholder="Email" className="bg-white" />
-          <Input type="password" placeholder="Password" className="bg-white" />
+          <Input
+            name="email"
+            type="email"
+            placeholder="Email"
+            className="bg-white"
+          />
+          <Input
+            name="password"
+            type="password"
+            placeholder="Password"
+            className="bg-white"
+          />
 
           <div className="flex flex-row gap-[16px]">
             <Button type="submit" className="bg-emerald-500">
@@ -39,8 +48,9 @@ export function SignInPageView() {
               className="flex-grow bg-white text-black"
               onClick={async () => {
                 "use server";
-                const response = await auth();
-                console.log({ response });
+                signIn("google", {
+                  redirectTo: "/",
+                });
               }}
             >
               <Image
