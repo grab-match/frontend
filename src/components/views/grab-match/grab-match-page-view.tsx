@@ -8,6 +8,7 @@ import { ROUTE_PATHS } from "../route";
 import "leaflet/dist/leaflet.css";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { useUserContext } from "@/contexts/UserContextProvider";
 
 const OpenStreetMap = dynamic(() => import("../../shared/Map"), {
   ssr: false,
@@ -17,34 +18,47 @@ const ImageCapture = dynamic(() => import("../../shared/CameraCaputre"), {
 });
 
 export default function GrabMatchPreferencesPageView() {
+  const { user } = useUserContext();
   const [location, setLocation] = useState<any>(null);
+  const [address, setAddress] = useState<string>("");
   const [image, setImage] = useState<string | null>(null);
 
-  const handleLocationSelect = (latlng: any) => {
+  const handleLocationSelect = async (latlng: any) => {
     setLocation(latlng);
+    const address = await getAddressFromLatLng(latlng.lat, latlng.lng);
+    setAddress(address);
   };
 
   const handleCapture = (capturedImage: string) => {
     setImage(capturedImage);
   };
 
+  const getAddressFromLatLng = async (lat: number, lng: number) => {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+    );
+    const data = await response.json();
+    return data.display_name;
+  };
+
   return (
     <div className="mx-auto max-w-[430px] min-h-[100vh] flex flex-col overflow-hidden">
       <div className="flex flex-row justify-between bg-emerald-100 p-[16px] relative">
-        <Link href={ROUTE_PATHS.GRAB_MATCH.ROOT}>
-          <Button variant="ghost" className="!w-fit !p-[8px] ml-[12px]">
-            <Icon
-              icon="ic:round-arrow-back-ios-new"
-              className="text-teal-900"
-            />
-          </Button>
-        </Link>
-
-        <div className="flex flex-col justify-center">
-          <p className="text-[18px] text-teal-900 font-bold text-center">
-            Set preferred
-          </p>
-          <p className="text-[14px] text-teal-900 font-semibold text-center">
+        <div className="flex flex-col">
+          <div className="flex flex-row items-center">
+            <Link href={ROUTE_PATHS.GRAB_MATCH.ROOT}>
+              <Button variant="ghost" className="!w-fit !p-[8px] ml-[12px]">
+                <Icon
+                  icon="ic:round-arrow-back-ios-new"
+                  className="text-teal-900"
+                />
+              </Button>
+            </Link>
+            <p className="text-[18px] text-teal-900 font-bold text-center">
+              Set preferred
+            </p>
+          </div>
+          <p className="max-w-[220px] text-[14px] text-teal-900 font-semibold ml-[16px]">
             Atur lokasi sampai kesukaanmu agar lebih mudah dan cepat dalam
             mencari GrabMatch!
           </p>
@@ -61,7 +75,7 @@ export default function GrabMatchPreferencesPageView() {
 
       <div className="mt-[24px] px-[32px]">
         <h1 className="text-2xl text-teal-600 font-semibold my-[24px]">
-          Hello <b>Qosim</b>, <br />
+          Hello <b>{user?.name || ""}</b>, <br />
           ready to match?
         </h1>
 
@@ -82,12 +96,22 @@ export default function GrabMatchPreferencesPageView() {
         <div className="mb-[24px]">
           <h2 className="text-xl font-bold text-teal-900 mb-2">Pickup Point</h2>
           <OpenStreetMap onLocationSelect={handleLocationSelect} />
+          {location && (
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold text-teal-900">
+                Selected Location
+              </h3>
+              <p className="text-teal-600">{address}</p>
+            </div>
+          )}
         </div>
 
         {/* Image Capture */}
         <div className="mb-[24px]">
-          <h2 className="text-xl font-bold text-teal-900 mb-2">Recent Face</h2>
-          <ImageCapture onCapture={handleCapture} />
+          <div className="flex flex-row items-center justify-between border-[1px] border-solid border-teal-900 rounded-[8px] p-[8px]">
+            <h2 className="text-xl font-bold text-teal-900">Recent Face</h2>
+            <ImageCapture onCapture={handleCapture} />
+          </div>
           {image && (
             <div>
               <img src={image} alt="Captured" className="w-full h-auto mt-2" />

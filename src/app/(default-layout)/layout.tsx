@@ -25,10 +25,7 @@ export default async function Layout({
     );
 
     user = data?.user;
-  } catch (e) {
-    cookies().delete("accessToken");
-    redirect(ROUTE_PATHS.AUTH.SIGNIN);
-  }
+  } catch (e) {}
 
   return <UserContextProvider value={{ user }}>{children}</UserContextProvider>;
 }
