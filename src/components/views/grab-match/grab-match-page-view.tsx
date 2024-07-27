@@ -19,12 +19,15 @@ const ImageCapture = dynamic(() => import("../../shared/CameraCaputre"), {
 
 export default function GrabMatchPreferencesPageView() {
   const { user } = useUserContext();
-  const [location, setLocation] = useState<any>(null);
+  const [location, setLocation] = useState<any>(
+    localStorage.getItem("location") ?? null
+  );
   const [address, setAddress] = useState<string>("");
   const [image, setImage] = useState<string | null>(null);
 
   const handleLocationSelect = async (latlng: any) => {
     setLocation(latlng);
+
     const address = await getAddressFromLatLng(latlng.lat, latlng.lng);
     setAddress(address);
   };
@@ -38,6 +41,9 @@ export default function GrabMatchPreferencesPageView() {
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
     );
     const data = await response.json();
+    if (data) {
+      localStorage.setItem("location", JSON.stringify({ lat, lng }));
+    }
     return data.display_name;
   };
 
