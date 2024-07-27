@@ -126,20 +126,7 @@ export default function GrabMatchPreferencesPageView() {
           </h2>
           <p>This help your match candidate know you better</p>
           <div className="bg-white p-4 rounded shadow mb-4">
-            <div className="flex justify-between items-center mb-4">
-              <span className="font-bold">Profile strength</span>
-              <span>80% complete</span>
-            </div>
-            <div className="flex items-center mb-2">
-              <span className="mr-2">165 cm</span>
-              <span className="mr-2">In college</span>
-              <span className="mr-2">Woman</span>
-            </div>
-            <div className="flex items-center mb-2">
-              <span className="mr-2">Virgo</span>
-              <span className="mr-2">Muslim</span>
-              <button className="bg-gray-200 p-2 rounded">Add Filter</button>
-            </div>
+            <span className="font-bold text-teal-900">About me</span>
           </div>
         </div>
 
@@ -148,17 +135,7 @@ export default function GrabMatchPreferencesPageView() {
           <h2 className="text-xl font-bold text-teal-900 mb-2">Interests</h2>
           <p>Get specific about the things you love.</p>
           <div className="bg-white p-4 rounded shadow mb-4">
-            <div className="flex justify-between items-center mb-4">
-              <span>Favorite interest</span>
-              <button className="bg-gray-200 p-2 rounded">Edit</button>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <span className="bg-gray-200 p-2 rounded">Philosophy</span>
-              <span className="bg-gray-200 p-2 rounded">Cafe-hopping</span>
-              <span className="bg-gray-200 p-2 rounded">Comedy</span>
-              <span className="bg-gray-200 p-2 rounded">Rock</span>
-              <span className="bg-gray-200 p-2 rounded">Coffee</span>
-            </div>
+            <span className="bg-gray-200 p-2 rounded">Philosophy</span>
           </div>
         </div>
 
