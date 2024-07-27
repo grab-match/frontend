@@ -58,7 +58,7 @@ export default function HomePageView() {
           </p>
         </div>
 
-        <Link href={ROUTE_PATHS.GRAB_MATCH}>
+        <Link href={ROUTE_PATHS.GRAB_MATCH.ROOT}>
           <div className="ml-[8px] min-w-[200px] flex flex-row justify-end items-end hover:opacity-80 transition-all duration-300 cursor-pointer">
             <Image
               src="/images/illustration-primary.svg"

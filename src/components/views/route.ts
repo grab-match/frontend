@@ -5,5 +5,8 @@ export const ROUTE_PATHS = {
   },
   SHOWSWIPE: "/showswipe",
   CHAT: "/chat",
-  GRAB_MATCH: "/grab-match",
+  GRAB_MATCH: {
+    ROOT: "/grab-match",
+    PREFERENCES: "/grab-match/preferences",
+  },
 };

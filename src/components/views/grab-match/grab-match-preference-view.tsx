@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { ROUTE_PATHS } from "../route";
 
-export default function GrabMatchPageView() {
+export default function GrabMatchPreferencesPageView() {
   return (
     <div className="mx-auto w-[430px] min-h-[100vh] flex flex-col justify-center p-[16px] overflow-hidden">
       <Link href={ROUTE_PATHS.ROOT}>
@@ -38,16 +38,14 @@ export default function GrabMatchPageView() {
         <p className="text-[18px] text-teal-600 font-bold">
           Set your preference first
         </p>
-        <Link href={ROUTE_PATHS.GRAB_MATCH.PREFERENCES}>
-          <div className="w-full bg-teal-900 p-[8px] rounded-[10px]">
-            <Image
-              alt="illustration-2"
-              src="/images/illustration-secondary.svg"
-              width={100}
-              height={80}
-            />
-          </div>
-        </Link>
+        <div className="w-full bg-teal-900 p-[8px] rounded-[10px]">
+          <Image
+            alt="illustration-2"
+            src="/images/illustration-secondary.svg"
+            width={100}
+            height={80}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-[8px] px-[24px] mt-[16px] mb-[32px]  hover:opacity-80 transition-all duration-300 cursor-pointer">
