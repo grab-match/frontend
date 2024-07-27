@@ -25,8 +25,17 @@ export default function HomePageView() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage
+                src={
+                  user?.picture
+                    ? user?.picture
+                    : "https://github.com/shadcn.png"
+                }
+                alt="provifle"
+              />
+              <AvatarFallback>
+                {user?.name?.slice(0, 2)?.toUpperCase() || ""}
+              </AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
