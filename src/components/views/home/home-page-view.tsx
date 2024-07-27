@@ -1,10 +1,44 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ROUTE_PATHS } from "../route";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { setAccessToken } from "@/utils/api";
+import { useRouter } from "next/navigation";
 
 export default function HomePageView() {
+  const router = useRouter();
+
   return (
-    <div className="mx-auto w-[430px] min-h-[100vh] flex flex-col justify-between overflow-hidden">
+    <div className="mx-auto max-w-[430px] min-h-[100vh] flex flex-col justify-between overflow-hidden">
+      <div className="flex justify-end p-[16px] pb-0 bg-[#38c474]">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel
+              className="cursor-pointer"
+              onClick={() => {
+                setAccessToken("");
+                router.push(ROUTE_PATHS.AUTH.SIGNIN);
+              }}
+            >
+              Logout
+            </DropdownMenuLabel>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <Image
         src="/images/pages/home-1.png"
         alt="top-nav"
@@ -24,7 +58,7 @@ export default function HomePageView() {
           </p>
         </div>
 
-        <Link href={ROUTE_PATHS.GRAB_MATCH}>
+        <Link href={ROUTE_PATHS.GRAB_MATCH.ROOT}>
           <div className="ml-[8px] min-w-[200px] flex flex-row justify-end items-end hover:opacity-80 transition-all duration-300 cursor-pointer">
             <Image
               src="/images/illustration-primary.svg"

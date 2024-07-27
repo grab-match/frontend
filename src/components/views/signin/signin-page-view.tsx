@@ -15,12 +15,14 @@ export function SignInPageView() {
           className="mx-auto"
         />
 
-        <div className="mx-auto max-w-[325px] flex flex-col justify-center">
+        <div className="mx-auto flex flex-col justify-center">
           <p className="text-center text-white font-bold text-[36px] mb-[36px]">
             GrabMatch
           </p>
 
-          <GoogleLoginButton />
+          <div className="flex justify-center">
+            <GoogleLoginButton />
+          </div>
         </div>
       </div>
     </GoogleOAuthProvider>

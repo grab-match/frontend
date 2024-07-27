@@ -14,16 +14,7 @@ const GoogleLoginButton = () => {
     router.push(ROUTE_PATHS.ROOT);
   };
 
-  return (
-    <GoogleLogin
-      containerProps={{
-        style: {
-          margin: "0 auto",
-        },
-      }}
-      onSuccess={handleLogin}
-    />
-  );
+  return <GoogleLogin onSuccess={handleLogin} />;
 };
 
 export default GoogleLoginButton;
