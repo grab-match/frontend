@@ -1,4 +1,4 @@
-import type { NextAuthConfig, Session } from "next-auth";
+import type { NextAuthConfig } from "next-auth";
 
 export const authConfig = {
   session: {
@@ -6,14 +6,23 @@ export const authConfig = {
   },
   callbacks: {
     async signIn({ account, profile }) {
-      console.log("JALAN COK");
-
-      console.log({ account, profile });
-
       if (account?.provider === "google") {
         return !!profile?.email_verified;
       }
       return true;
+    },
+    async jwt({ token, account, session }) {
+      return { ...token, ...account };
+    },
+    async session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          access_token: token?.access_token,
+          id_token: token?.id_token,
+        },
+      };
     },
   },
   secret: process.env.AUTH_SECRET,

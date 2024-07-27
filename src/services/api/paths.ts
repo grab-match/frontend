@@ -1,3 +1,6 @@
 export const API_PATHS = {
-  SIGN_IN: "/sign-in",
+  AUTH: {
+    ROOT: "/api/v1/auth",
+    SOCIAL: "/api/v1/auth/social",
+  },
 };
