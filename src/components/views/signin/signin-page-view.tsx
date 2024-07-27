@@ -9,7 +9,7 @@ export function SignInPageView() {
       <div className="flex flex-col justify-center">
         <Image
           alt="Login"
-          src="/images/login.svg"
+          src="/images/illustration-primary.svg"
           width={500}
           height={500}
           className="mx-auto"

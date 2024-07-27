@@ -53,7 +53,7 @@ const ReactQueryProvider: React.FC<ReactQueryProviderProps> = ({
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+      {/* <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" /> */}
     </QueryClientProvider>
   );
 };
