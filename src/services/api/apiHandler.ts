@@ -1,22 +1,28 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import https from "https";
 import queryString from "qs";
 import { camelizeKeys, decamelizeKeys } from "humps";
 import { ROUTE_PATHS } from "@/components/views/route";
+import { setAccessToken } from "@/utils/api";
+import cookies from "react-cookies";
 
 const client = axios.create({
-  baseURL: process.env.NEXT_API_URL,
-  httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+  baseURL: "https://054b-103-111-210-26.ngrok-free.app",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": true,
   },
 });
 
-const handleUnAuthorized = async () => {};
+const handleUnAuthorized = async () => {
+  setAccessToken(null);
+  window.location.href = ROUTE_PATHS.AUTH.SIGNIN;
+};
 
 client.interceptors.request.use(
   (config: InternalAxiosRequestConfig<any>) => {
+    const token = cookies.load("accessToken");
+
     config.paramsSerializer = (params) => {
       return queryString.stringify(params, { indices: false });
     };
@@ -37,12 +43,16 @@ client.interceptors.request.use(
       newConfig.data = decamelizeKeys(config.data);
     }
 
+    if (token) {
+      newConfig.headers.Authorization = `Bearer ${token}`;
+    }
+
     return newConfig;
   },
   (error: any) => {
     if (
       error?.response?.status === 401 &&
-      window.location.pathname !== ROUTE_PATHS.SIGNIN
+      window.location.pathname !== ROUTE_PATHS.AUTH.SIGNIN
     ) {
       handleUnAuthorized();
     }
@@ -79,7 +89,7 @@ client.interceptors.response.use(
   (error: any) => {
     if (
       error?.response?.status === 401 &&
-      window.location.pathname !== ROUTE_PATHS.SIGNIN
+      window.location.pathname !== ROUTE_PATHS.AUTH.SIGNIN
     ) {
       handleUnAuthorized();
     }
