@@ -12,9 +12,12 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { setAccessToken } from "@/utils/api";
 import { useRouter } from "next/navigation";
+import { useUserContext } from "@/contexts/UserContextProvider";
 
 export default function HomePageView() {
   const router = useRouter();
+
+  const { user } = useUserContext();
 
   return (
     <div className="mx-auto max-w-[430px] min-h-[100vh] flex flex-col justify-between overflow-hidden">
