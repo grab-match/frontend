@@ -58,6 +58,7 @@
     "lucide-react": "^0.416.0",
     "next": "14.2.5",
     "next-themes": "^0.3.0",
+    "nextjs-toploader": "^1.6.12",
     "qs": "^6.12.3",
     "react": "^18",
     "react-cookies": "^0.1.1",

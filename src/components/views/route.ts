@@ -3,5 +3,6 @@ export const ROUTE_PATHS = {
   AUTH: {
     SIGNIN: "/auth/signin",
   },
-  SHOWSWIPE: "/showswipe"
+  SHOWSWIPE: "/showswipe",
+  GRAB_MATCH: "/grab-match",
 };

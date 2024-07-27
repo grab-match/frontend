@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ROUTE_PATHS } from "../route";
 
 export default function HomePageView() {
   return (
@@ -22,20 +24,22 @@ export default function HomePageView() {
           </p>
         </div>
 
-        <div className="ml-[8px] min-w-[200px] flex flex-row justify-end items-end hover:opacity-80 transition-all duration-300 cursor-pointer">
-          <Image
-            src="/images/illustration-primary.svg"
-            alt="top-nav"
-            width={100}
-            height={70}
-            loading="lazy"
-          />
-          <div className="w-[120px] flex p-[10px] pl-[20px] pr-[12px] mb-[16px] bg-teal-600 rounded-r-[4px]">
-            <p className="text-[16px] text-right font-bold text-white whitespace-nowrap">
-              Grab Match
-            </p>
+        <Link href={ROUTE_PATHS.GRAB_MATCH}>
+          <div className="ml-[8px] min-w-[200px] flex flex-row justify-end items-end hover:opacity-80 transition-all duration-300 cursor-pointer">
+            <Image
+              src="/images/illustration-primary.svg"
+              alt="top-nav"
+              width={100}
+              height={70}
+              loading="lazy"
+            />
+            <div className="w-[120px] flex p-[10px] pl-[20px] pr-[12px] mb-[16px] bg-teal-600 rounded-r-[4px]">
+              <p className="text-[16px] text-right font-bold text-white whitespace-nowrap">
+                Grab Match
+              </p>
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
       <Image
         className="pb-[32px]"
