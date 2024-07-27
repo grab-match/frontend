@@ -3,4 +3,5 @@ export const ROUTE_PATHS = {
   AUTH: {
     SIGNIN: "/auth/signin",
   },
+  SHOWSWIPE: "/showswipe"
 };
