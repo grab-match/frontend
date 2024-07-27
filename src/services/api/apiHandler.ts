@@ -2,11 +2,10 @@ import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import https from "https";
 import queryString from "qs";
 import { camelizeKeys, decamelizeKeys } from "humps";
-import capitalize from "lodash/capitalize";
-import { API_PATHS } from "./paths";
+import { ROUTE_PATHS } from "@/components/views/route";
 
 const client = axios.create({
-  baseURL: process.env.NEXTAUTH_URL,
+  baseURL: process.env.NEXT_API_URL,
   httpsAgent: new https.Agent({ rejectUnauthorized: false }),
   headers: {
     Accept: "application/json",
@@ -43,7 +42,7 @@ client.interceptors.request.use(
   (error: any) => {
     if (
       error?.response?.status === 401 &&
-      window.location.pathname !== API_PATHS.SIGN_IN
+      window.location.pathname !== ROUTE_PATHS.SIGNIN
     ) {
       handleUnAuthorized();
     }
@@ -80,7 +79,7 @@ client.interceptors.response.use(
   (error: any) => {
     if (
       error?.response?.status === 401 &&
-      window.location.pathname !== API_PATHS.SIGN_IN
+      window.location.pathname !== ROUTE_PATHS.SIGNIN
     ) {
       handleUnAuthorized();
     }
