@@ -12,9 +12,12 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { setAccessToken } from "@/utils/api";
 import { useRouter } from "next/navigation";
+import { useUserContext } from "@/contexts/UserContextProvider";
 
 export default function HomePageView() {
   const router = useRouter();
+
+  const { user } = useUserContext();
 
   return (
     <div className="mx-auto max-w-[430px] min-h-[100vh] flex flex-col justify-between overflow-hidden">
@@ -22,8 +25,17 @@ export default function HomePageView() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage
+                src={
+                  user?.picture
+                    ? user?.picture
+                    : "https://github.com/shadcn.png"
+                }
+                alt="provifle"
+              />
+              <AvatarFallback>
+                {user?.name?.slice(0, 2)?.toUpperCase() || ""}
+              </AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
