@@ -74,7 +74,7 @@ client.interceptors.response.use(
       newResponse.data = camelizeKeys(newResponse.data);
     }
 
-    return newResponse?.data ?? newResponse;
+    return newResponse;
   },
   (error: any) => {
     if (

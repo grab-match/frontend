@@ -1,3 +1,5 @@
+import cookies from "react-cookies";
+
 /**
  * Extracts search parameters from a URL query string and converts them into an object.
  *
@@ -26,4 +28,19 @@ export const getParams = (
   });
 
   return queryObject;
+};
+
+export const setAccessToken = (token: string | null) => {
+  console.log({ token });
+  if (token) {
+    cookies.save("accessToken", token, {
+      path: "/",
+      expires: undefined,
+    });
+  } else {
+    cookies.remove("accessToken");
+    const d = new Date();
+    d.setTime(d.getTime() + -1 * 24 * 60 * 60 * 1000);
+    document.cookie = `role=;expires=${d.toUTCString()};path=/`;
+  }
 };

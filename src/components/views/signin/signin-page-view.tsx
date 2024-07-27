@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "./signin-button";
 
@@ -20,7 +19,7 @@ export function SignInPageView() {
           className="mx-auto"
         />
 
-        <div className="mx-auto max-w-[325px]">
+        <div className="mx-auto max-w-[325px] flex flex-col justify-center">
           <p className="text-center text-white font-bold text-[36px] mb-[36px]">
             GrabMatch
           </p>
