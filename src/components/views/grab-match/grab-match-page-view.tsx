@@ -6,7 +6,7 @@ import { ROUTE_PATHS } from "../route";
 
 export default function GrabMatchPageView() {
   return (
-    <div className="mx-auto w-[430px] min-h-[100vh] flex flex-col justify-center p-[16px] overflow-hidden">
+    <div className="mx-auto max-w-[430px] min-h-[100vh] flex flex-col justify-center p-[16px] overflow-hidden">
       <Link href={ROUTE_PATHS.ROOT}>
         <Button variant="outline" className="!w-fit">
           <Icon icon="ic:round-arrow-back-ios-new" />
@@ -25,7 +25,7 @@ export default function GrabMatchPageView() {
         <p className="text-[18px] text-teal-600 font-bold mt-[16px] mb-[8px]">
           Find your match, visit your destination
         </p>
-        <p className="text-[12px] text-teal-900">
+        <p className="text-[12px] text-teal-900 font-semibold">
           Atur jalan-jalan & makan bareng mu bersama orang baru bersama Grab.
           Fitur dilengkapi oleh AI!
         </p>

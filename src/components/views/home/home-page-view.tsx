@@ -17,7 +17,7 @@ export default function HomePageView() {
   const router = useRouter();
 
   return (
-    <div className="mx-auto min-w-[420px] max-w-[430px] min-h-[100vh] flex flex-col justify-between overflow-hidden">
+    <div className="mx-auto max-w-[430px] min-h-[100vh] flex flex-col justify-between overflow-hidden">
       <div className="flex justify-end p-[16px] pb-0 bg-[#38c474]">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
