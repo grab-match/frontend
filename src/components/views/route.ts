@@ -4,5 +4,6 @@ export const ROUTE_PATHS = {
     SIGNIN: "/auth/signin",
   },
   SHOWSWIPE: "/showswipe",
-  CHAT: "/chat"
+  CHAT: "/chat",
+  GRAB_MATCH: "/grab-match",
 };
