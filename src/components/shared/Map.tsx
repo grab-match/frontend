@@ -59,7 +59,7 @@ const MapPicker = ({
     <MapContainer
       center={center}
       zoom={20}
-      style={{ height: "300px", width: "100%" }}
+      style={{ height: "300px", width: "100%", zIndex: "100" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -3,4 +3,9 @@ export const API_PATHS = {
     ROOT: "/api/v1/auth",
     SOCIAL: "/api/v1/auth/social",
   },
+  DESTINATIONS: {
+    ROOT: "/api/v1/destinations",
+    DETAIL: "/api/v1/destinations",
+    PACKAGE: "/api/v1/destinations/package",
+  },
 };
