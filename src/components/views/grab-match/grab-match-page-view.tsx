@@ -6,7 +6,7 @@ import { ROUTE_PATHS } from "../route";
 
 export default function GrabMatchPageView() {
   return (
-    <div className="mx-auto w-[430px] min-h-[100vh] flex flex-col justify-center py-[16px] overflow-hidden">
+    <div className="mx-auto w-[430px] min-h-[100vh] flex flex-col justify-center p-[16px] overflow-hidden">
       <Link href={ROUTE_PATHS.ROOT}>
         <Button variant="outline" className="!w-fit">
           <Icon icon="ic:round-arrow-back-ios-new" />
@@ -48,7 +48,7 @@ export default function GrabMatchPageView() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-[8px] px-[24px] mt-[16px] hover:opacity-80 transition-all duration-300 cursor-pointer">
+      <div className="flex flex-col gap-[8px] px-[24px] mt-[16px] mb-[32px]  hover:opacity-80 transition-all duration-300 cursor-pointer">
         <p className="text-[18px] text-right text-teal-600 font-bold">
           Find the best match
         </p>
