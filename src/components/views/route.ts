@@ -1,3 +1,4 @@
 export const ROUTE_PATHS = {
-  root: "/",
+  ROOT: "/",
+  SIGNIN: "/signin",
 };

@@ -14,7 +14,7 @@ export const authConfig = {
     async jwt({ token, account, session }) {
       return { ...token, ...account };
     },
-    async session({ session, token }) {
+    async session({ session, token, user }): Promise<any> {
       return {
         ...session,
         user: {

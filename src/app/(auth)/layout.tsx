@@ -1,11 +1,14 @@
-import { auth, update } from "@/auth";
-import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
 import { ROUTE_PATHS } from "@/components/views/route";
 import { API_PATHS } from "@/services/api/paths";
 import axios from "axios";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function Layout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const response = await auth();
 
   if (!response?.user?.id_token) {
@@ -28,14 +31,13 @@ export default async function Home() {
         },
       }
     );
-
-    // await update({ user: { ...data, accessToken: headers["set-cookie"] } });
   } catch (e: any) {
-    console.log({ e });
     redirect(ROUTE_PATHS.SIGNIN);
   }
 
-  console.log({ user: await auth() });
-
-  return <Button>TESTT</Button>;
+  return (
+    <div className="flex items-center justify-center w-full h-screen bg-gradient-to-b from-teal-600 to-teal-950">
+      {children}
+    </div>
+  );
 }
