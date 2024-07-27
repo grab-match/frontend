@@ -6,11 +6,7 @@ import GoogleLoginButton from "./signin-button";
 export function SignInPageView() {
   return (
     <GoogleOAuthProvider clientId={process.env.AUTH_GOOGLE_ID || ""}>
-      <form
-        action={async () => {
-          "use server";
-        }}
-      >
+      <div className="flex flex-col justify-center">
         <Image
           alt="Login"
           src="/images/login.svg"
@@ -26,7 +22,7 @@ export function SignInPageView() {
 
           <GoogleLoginButton />
         </div>
-      </form>
+      </div>
     </GoogleOAuthProvider>
   );
 }
