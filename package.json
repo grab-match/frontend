@@ -53,6 +53,7 @@
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.1.7",
+    "firebase": "^10.12.4",
     "humps": "^2.0.1",
     "input-otp": "^1.2.4",
     "leaflet": "^1.9.4",
@@ -78,6 +79,7 @@
   },
   "devDependencies": {
     "@iconify/react": "^5.0.2",
+    "@types/firebase": "^3.2.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

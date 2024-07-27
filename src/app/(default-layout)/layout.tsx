@@ -25,7 +25,7 @@ export default async function Layout({
     );
 
     user = data?.user;
-  } catch (e) {}
+  } catch (e) { }
 
   return <UserContextProvider value={{ user }}>{children}</UserContextProvider>;
 }

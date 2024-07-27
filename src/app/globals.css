@@ -63,7 +63,48 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+@keyframes blink {
+  0% {
+    color: #30C2B7;
+  }
+
+  25% {
+    color: #0f6861;
+  }
+
+  50% {
+    color: transparent;
+  }
+
+  75% {
+    color: #0f6861;
+  }
+
+
+  100% {
+    color: #30C2B7;
+  }
+}
+
+
+.inputField {
+  padding: 8px;
+  border: 2px solid #30C2B7;
+  animation: blink 1s step-start 0s infinite;
+  /* Grey border similar to Tailwind's border-gray-200 */
+  border-radius: 8px;
+  /* Rounded corners similar to Tailwind's rounded-lg */
+  flex: 1;
+}
+
+.inputContainer {
+  display: flex;
+  margin-right: 16px;
 }
