@@ -25,3 +25,7 @@ export const destinations = ({
 export const destinationDetail = (id: string) => {
   return apiHandler.get(`${API_PATHS.DESTINATIONS.DETAIL}/${id}`);
 };
+
+export const destinationPackageDetail = (id: string) => {
+  return apiHandler.get(`${API_PATHS.DESTINATIONS.PACKAGE}/${id}`);
+};

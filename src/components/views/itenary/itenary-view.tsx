@@ -2,9 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { destinations } from "@/services/api/destinations";
+import {
+  destinationDetail,
+  destinationPackageDetail,
+  destinations,
+} from "@/services/api/destinations";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export function ItenaryPage() {
   const [location] = useState(
@@ -14,51 +19,96 @@ export function ItenaryPage() {
       null
   );
 
-  //  const {data, isFetching}= useQuery({
-  //     enabled: !!location?.lat && !!location?.lng,
-  //     queryKey: ["desinations", location],
-  //     queryFn: async () =>
-  //       await destinations({
-  //         latitude: location?.lat || "",
-  //         longitude: location?.lng || "",
-  //       }),
-  //   });
+  const [selectedTab, setSelectedTab] = useState<string | null>(null);
+  const [selectedDestination, setSelectedDestination] = useState<any>(null);
 
-  const isFetching = true;
+  const { data, isFetching } = useQuery({
+    enabled: selectedTab === "ai" && !!location?.lat && !!location?.lng,
+    queryKey: ["desinations", location],
+    queryFn: async () =>
+      await destinations({
+        latitude: location?.lat || "",
+        longitude: location?.lng || "",
+      }),
+  });
+
+  const { data: data1, isFetching: isFetching1 } = useQuery({
+    queryKey: ["desinations", "kota-tua-tour"],
+    queryFn: async () => await destinationPackageDetail("kota-tua-tour"),
+  });
+
+  const { data: data2, isFetching: isFetching2 } = useQuery({
+    queryKey: ["desinations", "scbd-tour"],
+    queryFn: async () => await destinationPackageDetail("scbd-tour"),
+  });
+
+  const isFetchingHeader =
+    selectedTab === "kota-tua-tour"
+      ? isFetching1
+      : selectedTab === "scbd-tour"
+      ? isFetching2
+      : isFetching;
+
+  useEffect(() => {
+    if (data1?.data) {
+      setSelectedTab("kota-tua-tour");
+      setSelectedDestination(data1?.data);
+    }
+  }, [data1]);
 
   return (
     <section className="mx-auto max-w-[420px]">
       <div className="flex flex-col h-screen p-4 bg-gray-100">
         <div className="flex items-center justify-between mb-4">
-          {isFetching ? (
+          {isFetchingHeader ? (
             <Skeleton className="w-[250px] h-[28px]" />
           ) : (
-            <h1 className="text-xl font-bold">Alto Restaurant & Bar</h1>
+            <h1 className="text-xl font-bold">{selectedDestination?.name}</h1>
           )}
         </div>
-        {isFetching ? (
+        {isFetchingHeader ? (
           <Skeleton className="w-full h-[40px] mb-4" />
         ) : (
-          <div className="text-center bg-gray-200 py-2 rounded">
-            <span>08.00 - 09.00</span>
+          <div className="text-center bg-gray-200 py-2 rounded  mb-4">
+            <span>
+              {selectedDestination?.startTime} - {selectedDestination?.endTime}
+            </span>
           </div>
         )}
 
         <div className="flex justify-between mb-4">
-          {isFetching ? (
+          {isFetching1 ? (
             <Skeleton className="w-24 h-24" />
           ) : (
-            <div className="bg-gray-300 h-24 w-24 rounded"></div>
+            <Image
+              alt="Kota Tua"
+              src="/images/itenary/kota-tua.png"
+              width={96}
+              height={96}
+              objectFit="cover"
+              className="rounded-[8px] hover:cursor-pointer hover:opacity-80"
+            />
           )}
-          {isFetching ? (
+
+          {isFetching2 ? (
             <Skeleton className="w-24 h-24" />
           ) : (
-            <div className="bg-gray-300 h-24 w-24 rounded"></div>
+            <Image
+              alt="Kota Tua"
+              src="/images/itenary/scbd.png"
+              width={96}
+              height={96}
+              objectFit="cover"
+              className="rounded-[8px] hover:cursor-pointer hover:opacity-80"
+            />
           )}
+
           {isFetching ? (
             <Skeleton className="w-24 h-24" />
           ) : (
-            <div className="bg-gray-300 h-24 w-24 rounded"></div>
+            <div className="flex justify-center items-center text-center p-[2px] font-semibold text-teal-900 bg-gray-300 h-24 w-24 rounded  hover:cursor-pointer hover:opacity-80">
+              AI Generate For You
+            </div>
           )}
         </div>
         <div className="mb-4">
