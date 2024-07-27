@@ -140,11 +140,11 @@ export default function GrabMatchPreferencesPageView() {
         </div>
 
         {/* Save & Matchmaking */}
-        <div className="flex justify-between">
+        <Link className="w-full" href={ROUTE_PATHS.SHOWSWIPE}>
           <Button className="bg-green-500 text-white w-full py-2 rounded mb-2">
             Save & Matchmaking
           </Button>
-        </div>
+        </Link>
       </div>
     </div>
   );
