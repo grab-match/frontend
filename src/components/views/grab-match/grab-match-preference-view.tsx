@@ -14,9 +14,14 @@ import { useState } from "react";
 
 export default function GrabMatchPreferencesPageView() {
   const [location, setLocation] = useState<any>(null);
+  const [image, setImage] = useState<string | null>(null);
 
   const handleLocationSelect = (latlng: any) => {
     setLocation(latlng);
+  };
+
+  const handleCapture = (capturedImage: string) => {
+    setImage(capturedImage);
   };
 
   console.log({ location });
