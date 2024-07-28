@@ -6,7 +6,7 @@ import { setAccessToken } from "@/utils/api";
 import cookies from "react-cookies";
 
 const client = axios.create({
-  baseURL: "https://054b-103-111-210-26.ngrok-free.app",
+  baseURL: "https://ef49-103-111-210-26.ngrok-free.app",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
