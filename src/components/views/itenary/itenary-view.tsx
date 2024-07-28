@@ -18,8 +18,10 @@ export function ItenaryPage() {
   const [location] = useState(
     (typeof window !== undefined &&
       localStorage?.getItem("location") &&
-      JSON.parse(localStorage?.getItem("location") as any)) ??
-      null
+      JSON.parse(localStorage?.getItem("location") as any)) ?? {
+      lat: -6.1753924,
+      lng: 106.8271528,
+    }
   );
 
   const [selectedTab, setSelectedTab] = useState<string | null>(
@@ -73,7 +75,7 @@ export function ItenaryPage() {
     if (responseData?.data) {
       setSelectedDestination(responseData?.data);
     }
-  }, [responseData]);
+  }, [responseData, selectedTab]);
 
   return (
     <section className="mx-auto max-w-[420px]">
