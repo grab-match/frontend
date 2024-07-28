@@ -122,12 +122,15 @@ export function ItenaryPage() {
             onClick={() => setSelectedTab("scbd-tour")}
           />
 
-          <div
-            className="flex justify-center items-center text-center p-[2px] font-semibold text-teal-900 bg-gray-300 h-24 w-24 rounded  hover:cursor-pointer hover:opacity-80"
+          <Image
+            alt="artificial intelligence"
+            src="/images/ai.png"
+            width={96}
+            height={96}
+            objectFit="cover"
+            className="rounded-[8px] hover:cursor-pointer hover:opacity-80"
             onClick={() => setSelectedTab("ai")}
-          >
-            AI Generate For You +
-          </div>
+          />
         </div>
 
         <div className="mb-4">
