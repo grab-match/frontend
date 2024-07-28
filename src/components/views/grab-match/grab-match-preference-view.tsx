@@ -10,12 +10,15 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useUserContext } from "@/contexts/UserContextProvider";
 
-const OpenStreetMap = dynamic(() => import("../../shared/Map"), {
+const OpenStreetMap = dynamic(() => import("@/components/shared/Map"), {
   ssr: false,
 });
-const ImageCapture = dynamic(() => import("../../shared/CameraCaputre"), {
-  ssr: false,
-});
+const ImageCapture = dynamic(
+  () => import("@/components/shared/CameraCaputre"),
+  {
+    ssr: false,
+  }
+);
 
 export default function GrabMatchPreferencesPageView() {
   const { user } = useUserContext();
