@@ -1,5 +1,6 @@
 "use client";
 
+import MultipleMarkersMap from "@/components/shared/MapMultiple";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -61,6 +62,12 @@ export function ItenaryPage() {
       : selectedTab === "scbd-tour"
       ? data2
       : data;
+
+  const coordinates =
+    responseData?.data?.itineraries?.map((e: any) => ({
+      lat: e?.location?.lat,
+      lng: e?.location?.lon,
+    })) || [];
 
   useEffect(() => {
     if (responseData?.data) {
@@ -158,12 +165,8 @@ export function ItenaryPage() {
         {isFetchingData ? (
           <Skeleton className="w-full h-[120px] mb-4" />
         ) : (
-          <div className="flex-1 mb-4">
-            <img
-              src="/path/to/your/map/image.png"
-              alt="Map"
-              className="w-full h-full object-cover rounded"
-            />
+          <div className="mb-4">
+            <MultipleMarkersMap arrCoordinates={coordinates} />
           </div>
         )}
 

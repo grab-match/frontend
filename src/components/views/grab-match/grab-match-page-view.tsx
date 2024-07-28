@@ -19,6 +19,7 @@ const ImageCapture = dynamic(() => import("../../shared/CameraCaputre"), {
 
 export default function GrabMatchPreferencesPageView() {
   const { user } = useUserContext();
+
   const [location, setLocation] = useState<any>(
     localStorage.getItem("location") ?? null
   );
@@ -133,16 +134,14 @@ export default function GrabMatchPreferencesPageView() {
           <p>This help your match candidate know you better</p>
           <div className="bg-white p-4 rounded shadow mb-4">
             <span className="font-bold text-teal-900">About me</span>
+            <p className="text-teal-600">{user?.about || "-"}</p>
           </div>
         </div>
 
         {/* Interests */}
         <div className="mb-[24px]">
           <h2 className="text-xl font-bold text-teal-900 mb-2">Interests</h2>
-          <p>Get specific about the things you love.</p>
-          <div className="bg-white p-4 rounded shadow mb-4">
-            <span className="bg-gray-200 p-2 rounded">Philosophy</span>
-          </div>
+          <p className="text-teal-600">{user?.interests || "-"}</p>
         </div>
 
         {/* Save & Matchmaking */}

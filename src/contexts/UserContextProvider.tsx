@@ -10,7 +10,11 @@ interface User {
   email: string;
   phone_number: string;
   role: string;
+  age: number;
   picture: string;
+  short_bio: string;
+  about: string;
+  interests: string;
 }
 
 interface IWrapper {
