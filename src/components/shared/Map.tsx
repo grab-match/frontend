@@ -42,7 +42,6 @@ const MapPicker = ({
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log({ latitude, longitude });
           setCenter(new L.LatLng(latitude, longitude));
         },
         (error) => {
