@@ -7,5 +7,6 @@ export const API_PATHS = {
     ROOT: "/api/v1/destinations",
     DETAIL: "/api/v1/destinations",
     PACKAGE: "/api/v1/destinations/package",
+    GENERATED: "/api/v1/destinations/generated",
   },
 };

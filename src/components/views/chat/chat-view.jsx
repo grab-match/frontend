@@ -18,6 +18,7 @@ import axios from "axios";
 import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { ROUTE_PATHS } from "@/components/views/route";
 
 import {
   Drawer,
@@ -29,48 +30,10 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useQuery } from "@tanstack/react-query";
+import { destinationGenerated } from "@/services/api/destinations";
 
-const data = [
-  {
-    goal: 400,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 278,
-  },
-  {
-    goal: 189,
-  },
-  {
-    goal: 239,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 278,
-  },
-  {
-    goal: 189,
-  },
-  {
-    goal: 349,
-  },
-];
+import { format, formatDistance, formatRelative, subDays } from "date-fns";
 
 export function ChatPage() {
   const router = useRouter();
@@ -81,7 +44,12 @@ export function ChatPage() {
       null
   );
 
-  console.log({ destinationSelected });
+  const [location] = useState(
+    (typeof window !== undefined &&
+      localStorage?.getItem("location") &&
+      JSON.parse(localStorage?.getItem("location"))) ??
+      null
+  );
 
   const [loading, setLoading] = useState(false);
   const [chatDocId, setChatDocId] = useState(null);
@@ -91,7 +59,6 @@ export function ChatPage() {
 
   const userEmail = localStorage.getItem("email") || "";
   const chatDB = collection(db, "chats");
-  console.log(user);
 
   const handleSend = async () => {
     if (message.trim() !== "" && chatDocId) {
@@ -207,8 +174,40 @@ export function ChatPage() {
 
   const [isMinimize, setIsMinimize] = useState(false);
   const [isOpenDrawer, setIsOPenDrawer] = useState(false);
+  const [pickupPoint, setPickupPoint] = useState("");
 
-  console.log({ destinationSelected });
+  const { data } = useQuery({
+    enabled: !!destinationSelected,
+    queryKey: ["generated", destinationSelected?.id],
+    queryFn: async () => {
+      return await destinationGenerated(destinationSelected?.id);
+    },
+  });
+
+  const generatedData = data?.data || null;
+
+  const getAddressFromLatLng = async (lat, lng) => {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+    );
+    const data = await response.json();
+    return data.display_name;
+  };
+
+  useEffect(() => {
+    if (location) {
+      const fetchAddress = async () => {
+        const response = await getAddressFromLatLng(
+          location?.lat,
+          location?.lng
+        );
+        setPickupPoint(response);
+      };
+
+      fetchAddress();
+    }
+  }, [location]);
+
   return (
     <>
       {messages?.length > 3 && !destinationSelected && (
@@ -321,15 +320,59 @@ export function ChatPage() {
                   </DrawerTrigger>
                   <DrawerContent>
                     <div className="mx-auto w-full max-w-sm">
-                      <DrawerHeader>
-                        <DrawerTitle>Schedule</DrawerTitle>
-                      </DrawerHeader>
-                      <div className="p-4 pb-0"></div>
+                      <div className="flex flex-col gap-[8px] p-4 pb-0">
+                        <p className="text-lg font-semibold leading-none tracking-tight">
+                          Schedule
+                        </p>
+                        <p className="">
+                          {(generatedData?.createdAt &&
+                            format(generatedData?.createdAt, "dd MMM")) ||
+                            ""}{" "}
+                          at{" "}
+                          {(generatedData?.startTime &&
+                            generatedData?.startTime) ||
+                            ""}
+                        </p>
+
+                        <p className="text-lg font-semibold leading-none tracking-tight">
+                          Duration of Journey
+                        </p>
+                        <div className="flex flex-start flex-row justify-between">
+                          <p className="">{generatedData?.duration || ""}</p>
+
+                          <div className="flex flex-col flex-end">
+                            <p className="text-sm">
+                              {new Intl.NumberFormat("id-ID", {
+                                style: "currency",
+                                currency: "IDR",
+                                maximumFractionDigits: 0,
+                              }).format(generatedData?.cars?.[0]?.price)}
+                            </p>
+                            <p className="text-sm">
+                              {generatedData?.cars?.[0]?.name}
+                            </p>
+                          </div>
+                        </div>
+
+                        <p className="text-lg font-semibold leading-none tracking-tight">
+                          Itinerary
+                        </p>
+                        <p className="">
+                          {generatedData?.itenaryIds?.length || ""} Agendas
+                        </p>
+
+                        <p className="text-lg font-semibold leading-none tracking-tight">
+                          Your Pickup Point
+                        </p>
+                        <p className="">{pickupPoint || ""}</p>
+                      </div>
                       <DrawerFooter>
                         <Button
                           className="bg-green-500 text-white w-full py-2 rounded mb-2"
                           onClick={() => {
                             setIsOPenDrawer(!isOpenDrawer);
+                            localStorage.setItem("isOpenDrawer", true);
+                            router.push(ROUTE_PATHS.ROOT);
                           }}
                         >
                           Accept & propose agenda

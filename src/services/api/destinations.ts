@@ -29,3 +29,7 @@ export const destinationDetail = (id: string) => {
 export const destinationPackageDetail = (id: string) => {
   return apiHandler.get(`${API_PATHS.DESTINATIONS.PACKAGE}/${id}`);
 };
+
+export const destinationGenerated = (id: string) => {
+  return apiHandler.get(`${API_PATHS.DESTINATIONS.GENERATED}/${id}`);
+};
