@@ -39,7 +39,9 @@ export default function GrabMatchPreferencesPageView() {
               </Button>
             </Link>
 
-            <p className="text-[18px] text-teal-900 font-bold">Set preferred</p>
+            <p className="text-[18px] text-teal-900 font-bold">
+              Set preferences
+            </p>
           </div>
 
           <div className="max-w-[220px] ml-[16px] mt-[8px]">
@@ -83,7 +85,7 @@ export default function GrabMatchPreferencesPageView() {
                 d="M8 7V3m8 4V3m-8 8v5a3 3 0 003 3h2a3 3 0 003-3v-5m4 0V7a2 2 0 00-2-2h-3M7 12V7a2 2 0 00-2-2H2m20 0h-3a2 2 0 00-2 2v5m0 0v5a2 2 0 01-2 2h-2a2 2 0 01-2-2v-5m0 0h4"
               />
             </svg>
-            <span>Jadwalin GoCar</span>
+            <span>Sunday, 28 July 2024</span>
           </div>
         </div>
 

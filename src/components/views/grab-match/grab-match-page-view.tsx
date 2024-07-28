@@ -62,7 +62,7 @@ export default function GrabMatchPreferencesPageView() {
               </Button>
             </Link>
             <p className="text-[18px] text-teal-900 font-bold text-center">
-              Set preferred
+              Set preferences
             </p>
           </div>
           <p className="max-w-[220px] text-[14px] text-teal-900 font-semibold ml-[16px]">
@@ -95,7 +95,7 @@ export default function GrabMatchPreferencesPageView() {
               icon="fluent:calendar-sync-20-regular"
               className="h-6 w-6 mr-2"
             />
-            <span>Jadwalin GoCar</span>
+            <span>Sunday, 28 July 2024</span>
           </div>
         </div>
 
