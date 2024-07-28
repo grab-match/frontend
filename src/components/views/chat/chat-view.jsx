@@ -17,8 +17,10 @@ import Image from "next/image";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export function ChatPage() {
+  const router = useRouter();
   const [destinationSelected] = useState(
     (typeof window !== undefined &&
       localStorage?.getItem("destinationSelected") &&
@@ -154,6 +156,21 @@ export function ChatPage() {
 
   return (
     <>
+      {messages?.length > 3 && !destinationSelected && (
+        <div className="max-w-[420px] absolute top-[80px] left-1/2 transform -translate-x-1/2">
+          <div className="w-[320px] flex justify-center">
+            <Button
+              className="bg-green-500 text-white w-full py-2 rounded mb-2"
+              onClick={() => {
+                router.push("/itenary");
+              }}
+            >
+              Set the itinerary
+            </Button>
+          </div>
+        </div>
+      )}
+
       {destinationSelected && (
         <div className="max-w-[420px] absolute top-[80px] left-1/2 transform -translate-x-1/2">
           <div className="w-[320px] flex justify-end">
