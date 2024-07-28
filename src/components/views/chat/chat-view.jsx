@@ -160,7 +160,7 @@ export function ChatPage() {
       if (!message) setMessage("Generate chat with AI");
       setLoading(true);
       let { data } = await axios.post(
-        "https://054b-103-111-210-26.ngrok-free.app/api/v1/chats/recommendation",
+        "https://ef49-103-111-210-26.ngrok-free.app/api/v1/chats/recommendation",
         messages
       );
       console.log(data);
