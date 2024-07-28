@@ -43,6 +43,7 @@ export default function HomePageView() {
               className="cursor-pointer"
               onClick={() => {
                 setAccessToken("");
+                localStorage.clear();
                 router.push(ROUTE_PATHS.AUTH.SIGNIN);
               }}
             >

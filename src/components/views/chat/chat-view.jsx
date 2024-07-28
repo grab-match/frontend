@@ -19,6 +19,59 @@ import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+const data = [
+  {
+    goal: 400,
+  },
+  {
+    goal: 300,
+  },
+  {
+    goal: 200,
+  },
+  {
+    goal: 300,
+  },
+  {
+    goal: 200,
+  },
+  {
+    goal: 278,
+  },
+  {
+    goal: 189,
+  },
+  {
+    goal: 239,
+  },
+  {
+    goal: 300,
+  },
+  {
+    goal: 200,
+  },
+  {
+    goal: 278,
+  },
+  {
+    goal: 189,
+  },
+  {
+    goal: 349,
+  },
+];
+
 export function ChatPage() {
   const router = useRouter();
   const [destinationSelected] = useState(
@@ -153,7 +206,9 @@ export function ChatPage() {
   };
 
   const [isMinimize, setIsMinimize] = useState(false);
+  const [isOpenDrawer, setIsOPenDrawer] = useState(false);
 
+  console.log({ destinationSelected });
   return (
     <>
       {messages?.length > 3 && !destinationSelected && (
@@ -250,6 +305,42 @@ export function ChatPage() {
               ))}
             </div>
           </div>
+          {destinationSelected && (
+            <div className="w-full flex justify-center bg-gray-100">
+              <div className="w-[320px] flex justify-center">
+                <Drawer>
+                  <DrawerTrigger asChild>
+                    <Button
+                      className="bg-green-500 text-white w-full py-2 rounded mb-2"
+                      onClick={() => {
+                        setIsOPenDrawer(!isOpenDrawer);
+                      }}
+                    >
+                      Accept & propose agenda
+                    </Button>
+                  </DrawerTrigger>
+                  <DrawerContent>
+                    <div className="mx-auto w-full max-w-sm">
+                      <DrawerHeader>
+                        <DrawerTitle>Schedule</DrawerTitle>
+                      </DrawerHeader>
+                      <div className="p-4 pb-0"></div>
+                      <DrawerFooter>
+                        <Button
+                          className="bg-green-500 text-white w-full py-2 rounded mb-2"
+                          onClick={() => {
+                            setIsOPenDrawer(!isOpenDrawer);
+                          }}
+                        >
+                          Accept & propose agenda
+                        </Button>
+                      </DrawerFooter>
+                    </div>
+                  </DrawerContent>
+                </Drawer>
+              </div>
+            </div>
+          )}
           <div className="flex p-4 border-t border-gray-200 gap-1.5">
             <button onClick={generateChatByAI}>
               <Image width="36" height="36" src={image} />

@@ -16,6 +16,7 @@ const client = axios.create({
 
 const handleUnAuthorized = async () => {
   setAccessToken(null);
+  localStorage.clear();
   window.location.href = ROUTE_PATHS.AUTH.SIGNIN;
 };
 
