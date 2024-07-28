@@ -4,10 +4,21 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@iconify/react";
+import { useQuery } from "@tanstack/react-query";
+import { userDetail } from "@/services/api/auth";
 
 export function ShowSwipePage() {
   const [page, setPage] = useState("YourSet");
   const router = useRouter();
+
+  const { data } = useQuery({
+    queryKey: ["user", "22"],
+    queryFn: async () => await userDetail("22"),
+  });
+
+  const user = data?.data;
+
+  console.log({ user });
 
   return (
     <section className=" mx-auto max-w-[430px] py-3">
@@ -70,8 +81,7 @@ export function ShowSwipePage() {
         <div
           className="flex-grow p-2 py-3 bg-white h-[560px] flex-wrap w-full flex flex-col content-end justify-between text-white"
           style={{
-            backgroundImage:
-              "url(https://wallpapers.com/images/hd/jennie-pictures-lwr3h2zhmj9xhpjr.jpg)",
+            backgroundImage: `url(${user?.picture})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -85,7 +95,9 @@ export function ShowSwipePage() {
               <p className="bg-[#39AAA2] rounded-full text-[12px] p-1 mb-1">
                 New here
               </p>
-              <p className="font-bold text-xl">Jennie, 28</p>
+              <p className="font-bold text-xl">
+                {user?.name}, {user?.age}
+              </p>
             </div>
             <div className="flex justify-between mb-2">
               <div className="bg-[#67AD98] w-[46px] h-[46px] rounded-full flex items-center justify-center">
@@ -123,7 +135,7 @@ export function ShowSwipePage() {
             <div className="bg-white rounded text-black p-1.5">
               <p>What are you looking for?</p>
               <p>
-                <b>singkat saja ayo pacaran</b>
+                <b>{user?.shortBio}</b>
               </p>
             </div>
           </div>
@@ -132,16 +144,10 @@ export function ShowSwipePage() {
           <div>
             <div className="">
               <p className="font-bold">About me</p>
-              <div className="flex flex-wrap gap-2 text-black">
-                <p className="bg-[#F7F7F7] p-1 rounded-2xl">165 cm</p>
-                <p className="bg-[#F7F7F7] p-1 rounded-2xl">In Collage</p>
-                <p className="bg-[#F7F7F7] p-1 rounded-2xl">Women </p>
-                <p className="bg-[#F7F7F7] p-1 rounded-2xl">Catholic</p>
-                <p className="bg-[#F7F7F7] p-1 rounded-2xl">Interest</p>
-              </div>
+              <p className="pb-2">{user?.about}</p>
             </div>
             <p className="font-bold">Interests</p>
-            <p className="pb-2">Get specific about the you love</p>
+            <p className="pb-2">{user?.interests}</p>
             <div className="flex flex-col gap-2">
               <div className="flex flex-col justify-content-start items-start">
                 <p className="font-bold">Favorite interest</p>

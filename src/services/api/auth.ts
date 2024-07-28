@@ -6,3 +6,7 @@ export const authSocial = (tokenId?: string) => {
     tokenId,
   });
 };
+
+export const userDetail = (id: string) => {
+  return apiHandler.get(`${API_PATHS.USERS.DETAIL}/${id}`);
+};

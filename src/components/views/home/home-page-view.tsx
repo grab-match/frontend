@@ -120,10 +120,10 @@ export default function HomePageView() {
           <div className="mx-auto w-full max-w-sm">
             <Image
               alt="talent"
-              src="/images/talent.png"
+              src="/images/talent.jpg"
               width={150}
               height={150}
-              className="mx-auto"
+              className="mx-auto rounded-[20px]"
             />
 
             <p className="text-lg font-semibold leading-none tracking-tight mt-[24px] mb-[8px]">

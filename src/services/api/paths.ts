@@ -9,4 +9,7 @@ export const API_PATHS = {
     PACKAGE: "/api/v1/destinations/package",
     GENERATED: "/api/v1/destinations/generated",
   },
+  USERS: {
+    DETAIL: "/api/v1/users",
+  },
 };
