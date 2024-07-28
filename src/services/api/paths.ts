@@ -11,5 +11,6 @@ export const API_PATHS = {
   },
   USERS: {
     DETAIL: "/api/v1/users",
+    MATCH_PERCENTAGE: "/api/v1/users",
   },
 };

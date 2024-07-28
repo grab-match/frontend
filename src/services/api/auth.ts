@@ -10,3 +10,9 @@ export const authSocial = (tokenId?: string) => {
 export const userDetail = (id: string) => {
   return apiHandler.get(`${API_PATHS.USERS.DETAIL}/${id}`);
 };
+
+export const userMatchPercentage = (id: string) => {
+  return apiHandler.get(
+    `${API_PATHS.USERS.MATCH_PERCENTAGE}/${id}/match_percentage`
+  );
+};

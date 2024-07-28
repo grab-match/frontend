@@ -5,7 +5,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@iconify/react";
 import { useQuery } from "@tanstack/react-query";
-import { userDetail } from "@/services/api/auth";
+import { userDetail, userMatchPercentage } from "@/services/api/auth";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function ShowSwipePage() {
   const [page, setPage] = useState("YourSet");
@@ -16,9 +17,13 @@ export function ShowSwipePage() {
     queryFn: async () => await userDetail("22"),
   });
 
-  const user = data?.data;
+  const { isFetching: isFetchingMatch, data: responseMatch } = useQuery({
+    queryKey: ["user-match", "22"],
+    queryFn: async () => await userMatchPercentage("22"),
+  });
 
-  console.log({ user });
+  const user = data?.data;
+  const userMatch = responseMatch?.data;
 
   return (
     <section className=" mx-auto max-w-[430px] py-3">
@@ -86,10 +91,16 @@ export function ShowSwipePage() {
             backgroundPosition: "center",
           }}
         >
-          <div className="flex-col bg-[#1E938B] w-16 h-16 rounded-full self-end border border-4 border-[#39AAA2] flex justify-center items-center">
-            <p className="text-white font-bold text-center">80%</p>
-            <p className="text-white text-[8px] text-center">Best Fit</p>
-          </div>
+          {isFetchingMatch ? (
+            <Skeleton className="rounded-full w-16 h-16 self-end" />
+          ) : (
+            <div className="flex-col bg-[#1E938B] w-16 h-16 rounded-full self-end border border-4 border-[#39AAA2] flex justify-center items-center">
+              <p className="text-white font-bold text-center">
+                {userMatch?.matchPercentage}%
+              </p>
+            </div>
+          )}
+
           <div className="w-full">
             <div className="flex flex-col justify-start items-start">
               <p className="bg-[#39AAA2] rounded-full text-[12px] p-1 mb-1">
@@ -142,6 +153,26 @@ export function ShowSwipePage() {
         </div>
         <div className="p-2 flex gap-2 flex-col">
           <div>
+            {isFetchingMatch ? (
+              <div className="flex flex-col gap-[4px] mb-[8px]">
+                <Skeleton className="w-[30px] h-[24px]" />
+                <Skeleton className="w-full h-[24px]" />
+                <Skeleton className="w-full h-[24px]" />
+              </div>
+            ) : (
+              <>
+                <p className="font-bold">
+                  {userMatch?.matchPercentage >= 50
+                    ? "You're Match!"
+                    : "Maybe, Skip!"}
+                </p>
+                <p className="pb-2">{userMatch?.reason}</p>
+              </>
+            )}
+            <div className="">
+              <p className="font-bold">About me</p>
+              <p className="pb-2">{user?.about}</p>
+            </div>
             <div className="">
               <p className="font-bold">About me</p>
               <p className="pb-2">{user?.about}</p>
